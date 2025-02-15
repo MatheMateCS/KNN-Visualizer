@@ -3,10 +3,13 @@ from tkinter import colorchooser
 
 
 w_width, w_height = 400, 400
+k = 10
 
 
 class KNNDrawer:
     def __init__(self, root):
+        self.training_points = dict()
+
         self.root = root
         self.root.title("KNN Visualiser")
 
@@ -31,13 +34,19 @@ class KNNDrawer:
             self.color = color
 
     def mark_pixel(self, event):
-        self.canvas.create_line(event.x, event.y, event.x + 1, event.y, fill=self.color)
+        x, y, color = event.x, event.y, self.color
+        self.canvas.create_line(x, y, x + 1, y, fill=color)
+        self.training_points[(x, y)] = color
+        self.update_colors()
 
     def clear_canvas(self):
         self.canvas.delete("all")
 
+    def update_colors(self):
+        pass
+
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = KNNDrawer(root)
-    root.mainloop()
+    rt = tk.Tk()
+    app = KNNDrawer(rt)
+    rt.mainloop()
