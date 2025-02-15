@@ -42,6 +42,26 @@ class KNNDrawer:
     def clear_canvas(self):
         self.canvas.delete("all")
 
+    @staticmethod
+    def distance(x1, y1, x2, y2):
+        return (x1 - x2) ** 2 + (y1 - y2) ** 2
+
+    @staticmethod
+    def mode(arr):
+        cnt = dict()
+        for el in arr:
+            if el not in cnt:
+                cnt[el] = 1
+            else:
+                cnt[el] += 1
+        max_cnt = max(cnt.values())
+        for key in cnt.keys():
+            if cnt[key] == max_cnt:
+                return key
+
+    def color_vote(self, x, y):
+        pass
+
     def update_colors(self):
         pass
 
