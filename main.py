@@ -60,10 +60,19 @@ class KNNDrawer:
                 return key
 
     def color_vote(self, x, y):
-        pass
+        colors = []
+        for pt in self.training_points.keys():
+            d = KNNDrawer.distance(x, y, pt[0], pt[1])
+            c = self.training_points[pt]
+            colors.append((d, c))
+        colors.sort(key=lambda el: el[0])
+        colors = [el[1] for el in colors]
+        return KNNDrawer.mode(colors[:k])
 
     def update_colors(self):
-        pass
+        for x in range(w_width):
+            for y in range(w_height):
+                self.canvas.create_line(x, y, x + 1, y, fill=self.color_vote(x, y))
 
 
 if __name__ == "__main__":
